@@ -46,6 +46,7 @@
     </dependencies>
 
     <build>
+        <finalName>homefood</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -58,32 +59,27 @@
                 </configuration>
             </plugin>
             <plugin>
-                <!-- Build an executable JAR -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
+                <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>2
+                    <outputDirectory>${basedir}</outputDirectory>
                     <archive>
                         <manifest>
-                            <mainClass>org.arpit.java2blog.AppMain</mainClass>
+                            <mainClass>com.ethicaltouch.homefood.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
                 <executions>
                     <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
                         <goals>
-                            <goal>java</goal>
+                            <goal>assembly</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <mainClass>com.ethicaltouch.homefood.Main</mainClass>
-                </configuration>
             </plugin>
         </plugins>
     </build>
