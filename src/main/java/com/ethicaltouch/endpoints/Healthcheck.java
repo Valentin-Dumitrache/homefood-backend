@@ -1,11 +1,9 @@
-package com.ethicaltouch;
+package com.ethicaltouch.endpoints;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 @Path("healthcheck")
-public class MyResource {
+public class Healthcheck {
     @GET
     public String getIt() {
         return "Alive!";
