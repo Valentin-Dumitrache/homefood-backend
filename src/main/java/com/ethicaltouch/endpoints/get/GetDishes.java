@@ -9,11 +9,10 @@ import javax.ws.rs.core.Response;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import static com.ethicaltouch.QueryExecutor.closeConnection;
+
 @Path("getDishes")
 public class GetDishes {
-    public static void main(String[] args) {
-        System.out.println(getDishes());
-    }
     @GET
     public static Response getDishes() {
         ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish");
@@ -29,12 +28,13 @@ public class GetDishes {
                 object.put("description", resultSet.getString("description"));
                 object.put("cookId", resultSet.getString("cookId"));
                 jsonObjectArrayList.add(object);
-                System.out.println(resultSet.getString(1));
             }
             response = Response.status(Response.Status.OK).entity(jsonObjectArrayList.toString()).build();
         } catch (Exception e) {
             System.out.println("error=" + e.getMessage());
         }
+        closeConnection();
         return response;
+
     }
 }
