@@ -5,8 +5,6 @@ import org.codehaus.jettison.json.JSONObject;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -14,14 +12,13 @@ import java.util.ArrayList;
 @Path("getDishes")
 public class GetDishes {
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
     public Response getDishes() {
         ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish");
         Response response = null;
         ArrayList<JSONObject> jsonObjectArrayList = new ArrayList<>();
-
         try {
             while (resultSet.next()) {
+                System.out.println(resultSet.getString(1));
                 JSONObject object = new JSONObject();
                 object.put("id", resultSet.getString("id"));
                 object.put("name", resultSet.getString("name"));
