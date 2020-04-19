@@ -11,14 +11,16 @@ import java.util.ArrayList;
 
 @Path("getDishes")
 public class GetDishes {
+    public static void main(String[] args) {
+        System.out.println(getDishes());
+    }
     @GET
-    public Response getDishes() {
+    public static Response getDishes() {
         ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish");
         Response response = null;
         ArrayList<JSONObject> jsonObjectArrayList = new ArrayList<>();
         try {
             while (resultSet.next()) {
-                System.out.println(resultSet.getString(1));
                 JSONObject object = new JSONObject();
                 object.put("id", resultSet.getString("id"));
                 object.put("name", resultSet.getString("name"));
@@ -27,6 +29,7 @@ public class GetDishes {
                 object.put("description", resultSet.getString("description"));
                 object.put("cookId", resultSet.getString("cookId"));
                 jsonObjectArrayList.add(object);
+                System.out.println(resultSet.getString(1));
             }
             response = Response.status(Response.Status.OK).entity(jsonObjectArrayList.toString()).build();
         } catch (Exception e) {
