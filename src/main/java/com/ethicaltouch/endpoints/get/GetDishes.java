@@ -30,6 +30,7 @@ public class GetDishes {
                 object.put("cookId", resultSet.getString("cookId"));
                 jsonObjectArrayList.add(object);
             }
+            resultSet.close();
             response = Response.status(Response.Status.OK).entity(jsonObjectArrayList.toString()).build();
         } catch (Exception e) {
             System.out.println("error=" + e.getMessage());

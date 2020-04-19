@@ -13,7 +13,6 @@ public class QueryExecutor {
             conn = DriverManager.getConnection(dbUrl);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
-            rs.close();
             stmt.close();
             conn.close();
         } catch (Exception se) {
