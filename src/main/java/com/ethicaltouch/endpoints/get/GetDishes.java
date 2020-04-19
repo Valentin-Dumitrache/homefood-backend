@@ -19,8 +19,10 @@ public class GetDishes {
         ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish");
         Response response = null;
         ArrayList<JSONObject> jsonObjectArrayList = new ArrayList<>();
+
         try {
             while (resultSet.next()) {
+                System.out.println(resultSet.getString("name"));
                 JSONObject object = new JSONObject();
                 object.put("id", resultSet.getString("id"));
                 object.put("name", resultSet.getString("name"));
@@ -30,7 +32,6 @@ public class GetDishes {
                 object.put("cookId", resultSet.getString("cookId"));
                 jsonObjectArrayList.add(object);
             }
-            resultSet.close();
             response = Response.status(Response.Status.OK).entity(jsonObjectArrayList.toString()).build();
         } catch (Exception e) {
             System.out.println("error=" + e.getMessage());
