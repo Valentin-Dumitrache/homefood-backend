@@ -13,8 +13,9 @@ public class QueryExecutor {
             conn = DriverManager.getConnection(dbUrl);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
-            stmt.close();
-            conn.close();
+//            stmt.close();
+//            conn.close();
+//            rs.close();
         } catch (Exception se) {
             se.printStackTrace();
         } finally {
