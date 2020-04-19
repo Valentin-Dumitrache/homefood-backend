@@ -19,18 +19,18 @@ public class QueryExecutor {
         } catch (Exception se) {
             se.printStackTrace();
         } finally {
-            try {
-                if (stmt != null)
-                    stmt.close();
-            } catch (SQLException se2) {
-                se2.printStackTrace();
-            }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+//            try {
+//                if (stmt != null)
+//                    stmt.close();
+//            } catch (SQLException se2) {
+//                se2.printStackTrace();
+//            }
+//            try {
+//                if (conn != null)
+//                    conn.close();
+//            } catch (SQLException se) {
+//                se.printStackTrace();
+//            }
         }
         System.out.println(rs);
         return rs;
