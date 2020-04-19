@@ -7,7 +7,7 @@ import javax.ws.rs.Path;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@Path("databasecheck")
+@Path("getDishes")
 public class GetDishes {
     @GET
     public String getDishes() {
