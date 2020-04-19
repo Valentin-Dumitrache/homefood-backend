@@ -1,7 +1,7 @@
 package com.ethicaltouch.endpoints.post;
 
 
-import com.ethicaltouch.postgresql.PostgresqlConnection;
+import com.ethicaltouch.QueryExecutor;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -29,7 +29,7 @@ public class CreateCook {
     )
     {
         try {
-            PostgresqlConnection.getConnection().createStatement().execute(String.format("INSERT INTO cook VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s ", id, firstName, lastName, city, county, description, delivery, coverPicture, profilePicture, phoneNumber));
+            QueryExecutor.getConnection().createStatement().execute(String.format("INSERT INTO cook VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s ", id, firstName, lastName, city, county, description, delivery, coverPicture, profilePicture, phoneNumber));
         } catch (SQLException e) {
             e.printStackTrace();
         }
