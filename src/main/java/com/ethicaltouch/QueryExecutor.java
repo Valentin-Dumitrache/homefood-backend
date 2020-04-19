@@ -31,6 +31,7 @@ public class QueryExecutor {
                 se.printStackTrace();
             }
         }
+        System.out.println(rs);
         return rs;
     }
 }
