@@ -29,7 +29,10 @@ public class GetDishes {
                 object.put("cookId", resultSet.getString("cookId"));
                 jsonObjectArrayList.add(object);
             }
-            response = Response.status(Response.Status.OK).entity(jsonObjectArrayList.toString()).build();
+            response = Response.status(Response.Status.OK)
+                    .entity(jsonObjectArrayList.toString())
+                    .header("Access-Control-Allow-Origin", "*")
+            .build();
         } catch (Exception e) {
             System.out.println("error=" + e.getMessage());
         }
