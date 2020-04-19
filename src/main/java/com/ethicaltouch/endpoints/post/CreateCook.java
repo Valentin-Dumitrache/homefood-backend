@@ -1,4 +1,4 @@
-package com.ethicaltouch.endpoints;
+package com.ethicaltouch.endpoints.post;
 
 
 import com.ethicaltouch.postgresql.PostgresqlConnection;
