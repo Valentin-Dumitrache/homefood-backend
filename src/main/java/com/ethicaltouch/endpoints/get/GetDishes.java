@@ -10,13 +10,13 @@ import java.sql.SQLException;
 @Path("getDishes")
 public class GetDishes {
     @GET
-    public String getDishes() {
+    public ResultSet getDishes() {
         ResultSet resultSet = null;
         try {
             resultSet = PostgresqlConnection.getConnection().createStatement().executeQuery("SELECT * FROM dish");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return resultSet.toString();
+        return resultSet;
     }
 }

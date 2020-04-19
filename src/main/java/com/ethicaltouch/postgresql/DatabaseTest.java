@@ -10,7 +10,7 @@ public class DatabaseTest {
     }
     public static void init() {
         try {
-            getConnection().createStatement().executeQuery("CREATE TABLE TEST (test varchar)");
+            System.out.println(getConnection().createStatement().execute("CREATE TABLE TEST (test varchar)"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
