@@ -12,16 +12,28 @@ import java.util.ArrayList;
 
 import static com.ethicaltouch.QueryExecutor.closeConnection;
 
-@Path("getCooks")
-public class GetCook {
+@Path("getDishesForCook")
+public class GetDishesForCook {
     @GET
-    public static Response getCook(
+    public static Response getDishesForCook(
             @QueryParam("id") String id
     ) {
-        ResultSet resultSet = QueryExecutor.init("SELECT * FROM cook WHERE 'id' = " + id );
+        ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish WHERE cookId='" + id + "'");
         Response response = null;
         ArrayList<JSONObject> jsonObjectArrayList = new ArrayList<>();
         try {
+            while (resultSet.next()) {
+                JSONObject object = new JSONObject();
+                object.put("id", resultSet.getString("id"));
+                object.put("name", resultSet.getString("name"));
+                object.put("imageSource", resultSet.getString("main_picture"));
+                object.put("price", resultSet.getString("price"));
+                object.put("description", resultSet.getString("description"));
+                object.put("cookId", resultSet.getString("cookId"));
+                jsonObjectArrayList.add(object);
+            }
+            closeConnection();
+            resultSet = QueryExecutor.init("SELECT * FROM cook WHERE 'id' = " + id );
             while (resultSet.next()) {
                 JSONObject object = new JSONObject();
                 object.put("id", resultSet.getString("id"));
@@ -44,6 +56,5 @@ public class GetCook {
         }
         closeConnection();
         return response;
-
     }
 }

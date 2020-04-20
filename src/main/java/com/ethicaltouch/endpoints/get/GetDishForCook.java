@@ -15,27 +15,28 @@ import static com.ethicaltouch.QueryExecutor.closeConnection;
 @Path("getDishForCook")
 public class GetDishForCook {
     @GET
-    public static Response getCook(
+    public static Response getDishForCook(
             @QueryParam("id") String id
     ) {
-        ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish WHERE 'id' = " + id );
+        ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish WHERE id='" + id + "'");
         Response response = null;
+        String cookId = null;
         ArrayList<JSONObject> jsonObjectArrayList = new ArrayList<>();
         try {
             while (resultSet.next()) {
                 JSONObject object = new JSONObject();
-                String cookId = resultSet.getString("cookId");
                 object.put("id", resultSet.getString("id"));
                 object.put("name", resultSet.getString("name"));
                 object.put("imageSource", resultSet.getString("main_picture"));
                 object.put("price", resultSet.getString("price"));
                 object.put("description", resultSet.getString("description"));
+                cookId = resultSet.getString("cookId");
                 object.put("cookId", resultSet.getString("cookId"));
                 jsonObjectArrayList.add(object);
             }
             closeConnection();
-            ResultSet resultSet2 = QueryExecutor.init("SELECT * FROM cook WHERE 'id' = " + id );
-            while (resultSet2.next()) {
+            resultSet = QueryExecutor.init("SELECT * FROM cook WHERE id='" + cookId + "'");
+            while (resultSet.next()) {
                 JSONObject object = new JSONObject();
                 object.put("id", resultSet.getString("id"));
                 object.put("firstName", resultSet.getString("firstName"));
@@ -57,5 +58,6 @@ public class GetDishForCook {
         }
         closeConnection();
         return response;
+
     }
 }
