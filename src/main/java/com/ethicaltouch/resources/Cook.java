@@ -1,9 +1,10 @@
 package com.ethicaltouch.resources;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cook {
+public class Cook implements Serializable {
     private String id;
     private String firstName;
     private String lastName;
