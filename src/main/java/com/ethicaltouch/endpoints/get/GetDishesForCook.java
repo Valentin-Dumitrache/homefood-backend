@@ -29,7 +29,7 @@ public class GetDishesForCook {
                 object.put("imageSource", resultSet.getString("main_picture"));
                 object.put("price", resultSet.getString("price"));
                 object.put("description", resultSet.getString("description"));
-                object.put("cookId", resultSet.getString("cookId"));
+                object.put("cookId", resultSet.getString("cook_id"));
                 jsonObjectArrayList.add(object);
             }
             closeConnection();
@@ -37,14 +37,14 @@ public class GetDishesForCook {
             while (resultSet.next()) {
                 JSONObject object = new JSONObject();
                 object.put("id", resultSet.getString("id"));
-                object.put("firstName", resultSet.getString("firstName"));
-                object.put("lastName", resultSet.getString("lastName"));
+                object.put("firstName", resultSet.getString("first_name"));
+                object.put("lastName", resultSet.getString("last_name"));
                 object.put("city", resultSet.getString("city"));
                 object.put("county", resultSet.getString("county"));
                 object.put("description", resultSet.getString("description"));
-                object.put("coverPicture", resultSet.getString("coverPicture"));
-                object.put("profilePicture", resultSet.getString("profilePicture"));
-                object.put("phoneNumber", resultSet.getString("phoneNumber"));
+                object.put("coverPicture", resultSet.getString("cover_picture"));
+                object.put("profilePicture", resultSet.getString("profile_picture"));
+                object.put("phoneNumber", resultSet.getString("phone_number"));
                 jsonObjectArrayList.add(object);
             }
             response = Response.status(Response.Status.OK)
