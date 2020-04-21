@@ -1,10 +1,9 @@
 package com.ethicaltouch.resources;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dish implements Serializable {
+public class Dish {
     private String id;
     private String name;
     private int price;
