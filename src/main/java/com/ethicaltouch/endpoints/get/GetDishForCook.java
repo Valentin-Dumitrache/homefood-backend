@@ -30,7 +30,7 @@ public class GetDishForCook {
                 object.put("imageSource", resultSet.getString("main_picture"));
                 object.put("price", resultSet.getString("price"));
                 object.put("description", resultSet.getString("description"));
-                cookId = resultSet.getString("cookId");
+                cookId = resultSet.getString("cook_id");
                 object.put("cookId", resultSet.getString("cook_id"));
                 jsonObjectArrayList.add(object);
             }

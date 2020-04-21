@@ -18,7 +18,7 @@ public class GetDishesForCook {
     public static Response getDishesForCook(
             @QueryParam("id") String id
     ) {
-        ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish WHERE cookId='" + id + "'");
+        ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish WHERE cook_id='" + id + "'");
         Response response = null;
         ArrayList<JSONObject> jsonObjectArrayList = new ArrayList<>();
         try {
