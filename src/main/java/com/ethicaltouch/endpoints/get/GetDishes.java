@@ -2,6 +2,7 @@ package com.ethicaltouch.endpoints.get;
 
 import com.ethicaltouch.QueryExecutor;
 import com.ethicaltouch.resources.Dish;
+import com.google.gson.Gson;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,9 +18,6 @@ import static com.ethicaltouch.QueryExecutor.closeConnection;
 
 @Path("getdishes")
 public class GetDishes {
-    public static void main(String[] args) {
-        System.out.println(getDishes("1a").getEntity());
-    }
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public static Response getDishes(@QueryParam("cookid") String cookId) {
@@ -45,7 +43,7 @@ public class GetDishes {
                 dishes.add(dish);
             }
             response = Response.status(Response.Status.OK)
-                    .entity(dishes)
+                    .entity(new Gson().toJson(dishes))
                     .header("Access-Control-Allow-Origin", "*")
             .build();
             closeConnection();

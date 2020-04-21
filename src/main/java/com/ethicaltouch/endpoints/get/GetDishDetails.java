@@ -8,9 +8,7 @@ import com.google.gson.Gson;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -24,7 +22,6 @@ public class GetDishDetails {
         System.out.println(getDishDetails("1a", "1a"));
     }
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
     public static Response getDishDetails(@NotNull @QueryParam("dishid") String dishId, @NotNull @QueryParam("cookid") String cookId) {
         Response response = null;
         try {

@@ -3,13 +3,12 @@ package com.ethicaltouch.endpoints.get;
 import com.ethicaltouch.QueryExecutor;
 import com.ethicaltouch.resources.Cook;
 import com.ethicaltouch.resources.Dish;
+import com.google.gson.Gson;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ import static com.ethicaltouch.QueryExecutor.closeConnection;
 @Path("getcookdetails")
 public class GetCookDetails {
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
     public static Response getCookDetails(@NotNull @QueryParam("cookid") String cookId) {
         Response response = null;
         List<Dish> dishes = new ArrayList<>();
@@ -55,7 +53,7 @@ public class GetCookDetails {
                 );
             }
             response = Response.status(Response.Status.OK)
-                    .entity(cook)
+                    .entity(new Gson().toJson(cook))
                     .header("Access-Control-Allow-Origin", "*")
                     .build();
             closeConnection();
