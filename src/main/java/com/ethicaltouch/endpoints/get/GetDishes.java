@@ -1,5 +1,6 @@
 package com.ethicaltouch.endpoints.get;
 
+import com.ethicaltouch.ObjectInitializer;
 import com.ethicaltouch.QueryExecutor;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -15,28 +16,22 @@ import static com.ethicaltouch.QueryExecutor.closeConnection;
 public class GetDishes {
     @GET
     public static Response getDishes() {
-        ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish");
         Response response = null;
         ArrayList<JSONObject> jsonObjectArrayList = new ArrayList<>();
         try {
+            ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish");
             while (resultSet.next()) {
-                JSONObject object = new JSONObject();
-                object.put("id", resultSet.getString("id"));
-                object.put("name", resultSet.getString("name"));
-                object.put("imageSource", resultSet.getString("main_picture"));
-                object.put("price", resultSet.getString("price"));
-                object.put("description", resultSet.getString("description"));
-                object.put("cookId", resultSet.getString("cook_id"));
-                jsonObjectArrayList.add(object);
+                jsonObjectArrayList.add(ObjectInitializer.addDish(resultSet));
             }
             response = Response.status(Response.Status.OK)
                     .entity(jsonObjectArrayList.toString())
                     .header("Access-Control-Allow-Origin", "*")
             .build();
+            closeConnection();
         } catch (Exception e) {
-            System.out.println("error=" + e.getMessage());
+            System.out.println(e.getMessage());
         }
-        closeConnection();
+
         return response;
 
     }

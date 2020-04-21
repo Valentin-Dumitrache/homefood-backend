@@ -18,23 +18,21 @@ public class GetDishPictures {
     public static Response getDishPictures(
             @QueryParam("id") String id
     ) {
-        ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish_picture WHERE dish_id='" + id + "'");
         Response response = null;
         ArrayList<JSONObject> jsonObjectArrayList = new ArrayList<>();
         try {
+            ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish_picture WHERE dish_id='" + id + "'");
             while (resultSet.next()) {
-                JSONObject object = new JSONObject();
-                object.put("pictureName", resultSet.getString("picture_url"));
-                jsonObjectArrayList.add(object);
+                jsonObjectArrayList.add(new JSONObject().put("pictureName", resultSet.getString("picture_url")));
             }
             response = Response.status(Response.Status.OK)
                     .entity(jsonObjectArrayList.toString())
                     .header("Access-Control-Allow-Origin", "*")
                     .build();
+            closeConnection();
         } catch (Exception e) {
-            System.out.println("error=" + e.getMessage());
+            System.out.println(e.getMessage());
         }
-        closeConnection();
         return response;
 
     }

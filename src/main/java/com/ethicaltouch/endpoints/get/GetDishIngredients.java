@@ -18,23 +18,22 @@ public class GetDishIngredients {
     public static Response getDishIngredients(
             @QueryParam("id") String id
     ) {
-        ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish_ingredient WHERE dish_id='" + id + "'");
         Response response = null;
         ArrayList<JSONObject> jsonObjectArrayList = new ArrayList<>();
         try {
+            ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish_ingredient WHERE dish_id='" + id + "'");
             while (resultSet.next()) {
-                JSONObject object = new JSONObject();
-                object.put("ingredientName", resultSet.getString("ingredient_name"));
-                jsonObjectArrayList.add(object);
+                jsonObjectArrayList.add(new JSONObject().put("ingredientName", resultSet.getString("ingredient_name")));
             }
             response = Response.status(Response.Status.OK)
                     .entity(jsonObjectArrayList.toString())
                     .header("Access-Control-Allow-Origin", "*")
                     .build();
+            closeConnection();
         } catch (Exception e) {
-            System.out.println("error=" + e.getMessage());
+            System.out.println(e.getMessage());
         }
-        closeConnection();
+
         return response;
 
     }
