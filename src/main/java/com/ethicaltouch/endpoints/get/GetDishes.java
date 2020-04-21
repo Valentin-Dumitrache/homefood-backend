@@ -3,7 +3,6 @@ package com.ethicaltouch.endpoints.get;
 import com.ethicaltouch.QueryExecutor;
 import com.ethicaltouch.resources.Dish;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -12,16 +11,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.ethicaltouch.QueryExecutor.closeConnection;
 
 @Path("getdishes")
 public class GetDishes {
+    public static void main(String[] args) {
+        System.out.println(getDishes("1a").getEntity());
+    }
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public static Response getDishes(@NotNull @QueryParam("cookid") String cookId) {
+    public static Response getDishes(@QueryParam("cookid") String cookId) {
         Response response = null;
-        ArrayList<Dish> dishes = new ArrayList<>();
+        List<Dish> dishes = new ArrayList<>();
         try {
             String query;
             if(cookId != null) {

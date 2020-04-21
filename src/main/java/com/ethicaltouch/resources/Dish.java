@@ -1,6 +1,7 @@
 package com.ethicaltouch.resources;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Dish {
     private String id;
@@ -9,8 +10,8 @@ public class Dish {
     private String mainPicture;
     private String description;
     private String cookId;
-    private ArrayList<String> pictures;
-    private ArrayList<String> ingredients;
+    private List<String> pictures;
+    private List<String> ingredients;
     private Cook cook;
 
     public Dish() {
@@ -19,8 +20,8 @@ public class Dish {
 
 
     public Dish(Dish dish,
-                ArrayList<String> pictures,
-                ArrayList<String> ingredients,
+                List<String> pictures,
+                List<String> ingredients,
                 Cook cook
     ) {
         this.id = dish.id;
@@ -56,7 +57,7 @@ public class Dish {
         this.cook = cook;
     }
 
-    public ArrayList<String> getPictures() {
+    public List<String> getPictures() {
         return pictures;
     }
 
@@ -64,7 +65,7 @@ public class Dish {
         this.pictures = pictures;
     }
 
-    public ArrayList<String> getIngredients() {
+    public List<String> getIngredients() {
         return ingredients;
     }
 

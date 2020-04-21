@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.ethicaltouch.QueryExecutor.closeConnection;
 
@@ -22,7 +23,7 @@ public class GetCookDetails {
     @Produces(MediaType.APPLICATION_JSON)
     public static Response getCookDetails(@NotNull @QueryParam("cookid") String cookId) {
         Response response = null;
-        ArrayList<Dish> dishes = new ArrayList<>();
+        List<Dish> dishes = new ArrayList<>();
         Cook cook = null;
         try {
             ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish WHERE cook_id='" + cookId + "'");
