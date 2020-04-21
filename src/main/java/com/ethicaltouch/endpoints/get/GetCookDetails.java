@@ -1,6 +1,7 @@
 package com.ethicaltouch.endpoints.get;
 
 import com.ethicaltouch.QueryExecutor;
+import com.ethicaltouch.resources.Cook;
 import com.ethicaltouch.resources.Dish;
 
 import javax.validation.constraints.NotNull;
@@ -15,21 +16,16 @@ import java.util.ArrayList;
 
 import static com.ethicaltouch.QueryExecutor.closeConnection;
 
-@Path("getdishes")
-public class GetDishes {
+@Path("getcookdetails")
+public class GetCookDetails {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public static Response getDishes(@NotNull @QueryParam("cookid") String cookId) {
+    public static Response getCookDetails(@NotNull @QueryParam("cookid") String cookId) {
         Response response = null;
         ArrayList<Dish> dishes = new ArrayList<>();
+        Cook cook = null;
         try {
-            String query;
-            if(cookId != null) {
-                query = "SELECT * FROM dish WHERE cook_id='" + cookId + "'";
-            } else {
-                query = "SELECT * FROM dish";
-            }
-            ResultSet resultSet = QueryExecutor.init(query);
+            ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish WHERE cook_id='" + cookId + "'");
             while (resultSet.next()) {
                 Dish dish = new Dish(
                         resultSet.getString("id"),
@@ -38,18 +34,33 @@ public class GetDishes {
                         resultSet.getString("main_picture"),
                         resultSet.getString("description"),
                         resultSet.getString("cook_id")
-                        );
+                );
                 dishes.add(dish);
             }
+            closeConnection();
+            resultSet = QueryExecutor.init("SELECT * FROM cook WHERE id='" + cookId + "'" );
+            while(resultSet.next()) {
+                cook = new Cook(
+                        cookId,
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("city"),
+                        resultSet.getString("county"),
+                        resultSet.getString("description"),
+                        resultSet.getString("cover_picture"),
+                        resultSet.getString("profile_picture"),
+                        resultSet.getString("phone_number"),
+                        dishes
+                );
+            }
             response = Response.status(Response.Status.OK)
-                    .entity(dishes)
+                    .entity(cook)
                     .header("Access-Control-Allow-Origin", "*")
-            .build();
+                    .build();
             closeConnection();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return response;
-
     }
 }
