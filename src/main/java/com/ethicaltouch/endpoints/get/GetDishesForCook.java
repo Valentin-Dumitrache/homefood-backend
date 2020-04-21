@@ -33,7 +33,7 @@ public class GetDishesForCook {
                 jsonObjectArrayList.add(object);
             }
             closeConnection();
-            resultSet = QueryExecutor.init("SELECT * FROM cook WHERE 'id' = " + id );
+            resultSet = QueryExecutor.init("SELECT * FROM cook WHERE id='" + id + "'" );
             while (resultSet.next()) {
                 JSONObject object = new JSONObject();
                 object.put("id", resultSet.getString("id"));
