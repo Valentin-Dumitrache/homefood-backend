@@ -48,12 +48,12 @@ public class GetCookDetails {
                         resultSet.getString("description"),
                         resultSet.getString("cover_picture"),
                         resultSet.getString("profile_picture"),
-                        resultSet.getString("phone_number"),
-                        dishes
+                        resultSet.getString("phone_number")
                 );
             }
+            Cook cookWithDishes = new Cook(cook, dishes);
             response = Response.status(Response.Status.OK)
-                    .entity(new Gson().toJson(cook))
+                    .entity(new Gson().toJson(cookWithDishes))
                     .header("Access-Control-Allow-Origin", "*")
                     .build();
             closeConnection();

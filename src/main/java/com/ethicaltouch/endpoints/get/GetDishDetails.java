@@ -27,11 +27,11 @@ public class GetDishDetails {
         try {
             List<String> ingredients = new ArrayList<>();
             List<String> pictures = new ArrayList<>();
-            Dish dishWithoutDetails = null;
+            Dish dish = null;
             Cook cook = null;
             ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish WHERE id='" + dishId + "'");
             while (resultSet.next()) {
-                dishWithoutDetails = new Dish(
+                dish = new Dish(
                         resultSet.getString("id"),
                         resultSet.getString("name"),
                         resultSet.getInt("price"),
@@ -64,13 +64,12 @@ public class GetDishDetails {
                         resultSet.getString("description"),
                         resultSet.getString("cover_picture"),
                         resultSet.getString("profile_picture"),
-                        resultSet.getString("phone_number"),
-                        null
+                        resultSet.getString("phone_number")
                 );
             }
-            Dish dish = new Dish(dishWithoutDetails, pictures, ingredients, cook);
+            Dish dishWithDetails = new Dish(dish, pictures, ingredients, cook);
             response = Response.status(Response.Status.OK)
-                    .entity(new Gson().toJson(dish))
+                    .entity(new Gson().toJson(dishWithDetails))
                     .header("Access-Control-Allow-Origin", "*")
                     .build();
             closeConnection();

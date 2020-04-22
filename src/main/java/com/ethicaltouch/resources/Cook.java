@@ -14,9 +14,15 @@ public class Cook {
     private String profilePicture;
     private String phoneNumber;
     private List<Dish> dishes;
+    private Cook cook;
 
     public Cook() {
 
+    }
+    public Cook(Cook cook,
+                List<Dish> dishes) {
+        this.cook = cook;
+        this.dishes = dishes;
     }
     public Cook(String id,
                 String firstName,
@@ -26,8 +32,7 @@ public class Cook {
                 String description,
                 String coverPicture,
                 String profilePicture,
-                String phoneNumber,
-                List<Dish> dishes) {
+                String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,7 +42,6 @@ public class Cook {
         this.coverPicture = coverPicture;
         this.profilePicture = profilePicture;
         this.phoneNumber = phoneNumber;
-        this.dishes = dishes;
     }
 
     public String getId() {
@@ -118,5 +122,13 @@ public class Cook {
 
     public void setDishes(ArrayList<Dish> dishes) {
         this.dishes = dishes;
+    }
+
+    public Cook getCook() {
+        return cook;
+    }
+
+    public void setCook(Cook cook) {
+        this.cook = cook;
     }
 }
