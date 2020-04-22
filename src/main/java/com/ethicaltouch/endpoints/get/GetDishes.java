@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.ResultSet;
@@ -20,17 +19,11 @@ import static com.ethicaltouch.QueryExecutor.closeConnection;
 public class GetDishes {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public static Response getDishes(@QueryParam("cookid") String cookId) {
+    public static Response getDishes() {
         Response response = null;
         List<Dish> dishes = new ArrayList<>();
         try {
-            String query;
-            if(cookId != null) {
-                query = "SELECT * FROM dish WHERE cook_id='" + cookId + "'";
-            } else {
-                query = "SELECT * FROM dish";
-            }
-            ResultSet resultSet = QueryExecutor.init(query);
+            ResultSet resultSet = QueryExecutor.init("SELECT * FROM dish");
             while (resultSet.next()) {
                 Dish dish = new Dish(
                         resultSet.getString("id"),
