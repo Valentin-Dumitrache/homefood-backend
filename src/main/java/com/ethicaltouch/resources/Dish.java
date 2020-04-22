@@ -13,6 +13,7 @@ public class Dish {
     private List<String> pictures;
     private List<String> ingredients;
     private Cook cook;
+    private Dish dish;
 
     public Dish() {
 
@@ -24,12 +25,7 @@ public class Dish {
                 List<String> ingredients,
                 Cook cook
     ) {
-        this.id = dish.id;
-        this.name = dish.name;
-        this.price = dish.price;
-        this.description = dish.description;
-        this.cookId = dish.cookId;
-        this.mainPicture = dish.mainPicture;
+        this.dish = dish;
         this.pictures = pictures;
         this.ingredients = ingredients;
         this.cook = cook;
@@ -119,5 +115,13 @@ public class Dish {
 
     public String getMainPicture() {
         return mainPicture;
+    }
+
+    public Dish getDish() {
+        return dish;
+    }
+
+    public void setDish(Dish dish) {
+        this.dish = dish;
     }
 }
