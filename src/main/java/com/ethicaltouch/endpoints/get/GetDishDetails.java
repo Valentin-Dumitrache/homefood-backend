@@ -18,11 +18,8 @@ import static com.ethicaltouch.QueryExecutor.closeConnection;
 
 @Path("getdishdetails")
 public class GetDishDetails {
-    public static void main(String[] args) {
-        System.out.println(getDishDetails("1a", "1a"));
-    }
     @GET
-    public static Response getDishDetails(@NotNull @QueryParam("dishid") String dishId, @NotNull @QueryParam("cookid") String cookId) {
+    public static Response getDishDetails(@NotNull @QueryParam("dishid") String dishId) {
         Response response = null;
         try {
             List<String> ingredients = new ArrayList<>();
@@ -53,10 +50,10 @@ public class GetDishDetails {
             }
             closeConnection();
 
-            resultSet = QueryExecutor.init("SELECT * FROM cook WHERE id='" + cookId + "'");
+            resultSet = QueryExecutor.init("SELECT * FROM cook WHERE id='" + dish.getCookId() + "'");
             while(resultSet.next()) {
                 cook = new Cook(
-                        cookId,
+                        dish.getCookId(),
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name"),
                         resultSet.getString("city"),
