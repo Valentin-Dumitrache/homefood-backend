@@ -10,6 +10,7 @@ public class Dish {
     private String mainPicture;
     private String description;
     private String cookId;
+    private String section;
     private List<String> pictures;
     private List<String> ingredients;
     private Cook cook;
@@ -36,13 +37,15 @@ public class Dish {
                 int price,
                 String mainPicture,
                 String description,
-                String cookId) {
+                String cookId,
+                String section) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.cookId = cookId;
         this.mainPicture = mainPicture;
+        this.section = section;
     }
 
     public Cook getCook() {
@@ -123,5 +126,13 @@ public class Dish {
 
     public void setDish(Dish dish) {
         this.dish = dish;
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
     }
 }

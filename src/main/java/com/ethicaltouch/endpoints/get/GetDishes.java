@@ -31,7 +31,8 @@ public class GetDishes {
                         resultSet.getInt("price"),
                         resultSet.getString("main_picture"),
                         resultSet.getString("description"),
-                        resultSet.getString("cook_id")
+                        resultSet.getString("cook_id"),
+                        resultSet.getString("section")
                         );
                 dishes.add(dish);
             }
