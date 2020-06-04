@@ -11,6 +11,7 @@ public class Dish {
     private String description;
     private String cookId;
     private String section;
+    private List<String> labels;
     private List<String> pictures;
     private List<String> ingredients;
     private Cook cook;
@@ -24,12 +25,14 @@ public class Dish {
     public Dish(Dish dish,
                 List<String> pictures,
                 List<String> ingredients,
+                List<String> labels,
                 Cook cook
     ) {
         this.dish = dish;
         this.pictures = pictures;
         this.ingredients = ingredients;
         this.cook = cook;
+        this.labels = labels;
     }
 
     public Dish(String id,
@@ -38,7 +41,8 @@ public class Dish {
                 String mainPicture,
                 String description,
                 String cookId,
-                String section) {
+                String section
+                ) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -134,5 +138,13 @@ public class Dish {
 
     public void setSection(String section) {
         this.section = section;
+    }
+
+    public List<String> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<String> labels) {
+        this.labels = labels;
     }
 }
