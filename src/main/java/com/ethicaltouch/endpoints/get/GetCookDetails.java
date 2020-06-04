@@ -33,8 +33,7 @@ public class GetCookDetails {
                         resultSet.getString("main_picture"),
                         resultSet.getString("description"),
                         resultSet.getString("cook_id"),
-                        resultSet.getString("section"),
-                        resultSet.getString("label")
+                        resultSet.getString("section")
                 );
                 dishes.add(dish);
             }
